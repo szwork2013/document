@@ -1,0 +1,9 @@
+/huibao/
+/.build
+*.msi
+*.7z
+*.jpg
+*.edx
+*.tif
+*.png
+/tasks/

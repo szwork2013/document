@@ -1,0 +1,11 @@
+∑√Œ URL£∫
+http://subclipse.tigris.org/
+http://*.eclipse.org/
+http://repo.grails.org/grails/libs-releases/
+http://m2repo.spockframework.org/ext/
+http://download.java.net/maven/2/
+http://repo.spring.io/milestone
+http://*.grails.org
+http://dist.springframework.org.s3.amazonaws.com
+http://*.springsource.com
+http://*.springsource.org
