@@ -2,6 +2,7 @@
 /.build
 *.msi
 *.7z
+*.ZIP
 *.jpg
 *.edx
 *.tif
