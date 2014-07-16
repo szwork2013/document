@@ -1,0 +1,19 @@
+用户表
+mongoexport --db huibaoDB --collection users --out dbdata/users.json
+用户信息表
+mongoexport --db huibaoDB --collection userinfos --out dbdata/userinfos.json
+
+机构表
+mongoexport --db huibaoDB --collection branches --out dbdata/branches.json
+角色表
+mongoexport --db huibaoDB --collection roles --out dbdata/roles.json
+菜单表
+mongoexport --db huibaoDB --collection menus --out dbdata/menus.json
+省信息
+mongoexport --db huibaoDB --collection provinces --out dbdata/provinces.json
+市信息
+mongoexport --db huibaoDB --collection citys --out dbdata/citys.json
+区信息
+mongoexport --db huibaoDB --collection countys --out dbdata/countys.json
+镇信息
+mongoexport --db huibaoDB --collection towns --out dbdata/towns.json
