@@ -1,0 +1,56 @@
+1、ssh连接服务器
+ssh root@server_ip
+2、可以使用阿里云服务器自带的auto_fdisk.sh将硬盘挂载至文件系统，
+但是这种方法配置较为固定，不够灵活，如需要使用不同的文件系统类型或者文件目录名等，需要修改此脚本。
+下面我们采用手动的方式进行分区等linux服务器的配置。
+3、fdisk命令查看有无未挂载的盘/dev/xvdb
+fdisk -l
+4、使用fdisk将/dev/xvdb建立成新分区。
+fdisk /dev/xvdb
+5、按n、按p、按1、按两次回车、按wq回车，分区/dev/xvdb1完成。
+6、使用mkfs.ext4命令将新分区/dev/xvdb1格式化为ext4文件系统格式
+mkfs.ext4 /dev/xvdb1
+7、建立应用目录/app
+mkdir /app
+8、将目录对应的分区信息写入/dev/fstab表
+echo '/dev/xvdb1 /app ext4 defaults 0 0' >> /etc/fstab
+9、使用mount命令重新加载/dev/fstab，将/dev/xvdb1挂载至/app目录
+mount -a
+10、使用groupadd命令增加新组appgroup、mongodb
+groupadd appgroup
+groupadd mongodb
+11、使用useradd命令增加新用户mongodb
+useradd mongodb -g mongodb -G appgroup
+12、使用passwd命令修改mongodb用户密码
+passwd mongodb
+13、为mongodb分配应用目录
+mkdir /app/mongodb
+chown mongodb:mongodb /app/mongodb
+
+好了，退出root用户，下面的操作请使用mongodb用户执行。
+什么？密码忘了？使用root再改一次呗(root su过去的话也不需要密码)。
+root也忘了的话，你把这个文档窗口叉掉吧。
+
+1、本地scp上传mongodb压缩包，本地执行：
+scp mongodb-linux-x86_64-2.6.3.tgz mongodb@serverip:/home/mongodb/install
+2、解压缩tar包
+cp /home/mongodb/install/mongodb-linux-x86_64-2.6.3.tgz /app/mongodb
+gzip -d mongodb-linux-x86_64-2.6.3.tgz
+tar xvf mongodb-linux-x86_64-2.6.3.tar
+3、新建mongodb数据、日志目录
+mkdir -p /app/mongodb/data/db
+mkdir /app/mongodb/log
+4、配置path
+vi /home/mongodb/.bash_profile
+PATH添加后为：PATH=$PATH:$HOME/bin:/app/mongodb/mongodb-linux-x86_64-2.6.3/bin
+vi保存，退出shell后重新登录。
+5、新建startMongoDB.sh，内容为：
+mongod --dbpath=/app/mongodb/data/db --logpath=/app/mongodb/log/mongo.log &
+6、新建stopMongoDB.sh，内容为：
+mongod --dbpath=/app/mongodb/data/db --shutdown
+7、使用startMongoDB.sh启动
+sh startMongoDB.sh
+8、使用mongo命令连接。
+
+
+
