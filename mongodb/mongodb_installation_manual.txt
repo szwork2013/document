@@ -45,7 +45,7 @@ vi /home/mongodb/.bash_profile
 PATH添加后为：PATH=$PATH:$HOME/bin:/app/mongodb/mongodb-linux-x86_64-2.6.3/bin
 vi保存，退出shell后重新登录。
 5、新建startMongoDB.sh，内容为：
-mongod --dbpath=/app/mongodb/data/db --logpath=/app/mongodb/log/mongo.log &
+mongod --dbpath=/app/mongodb/data/db --logpath=/app/mongodb/log/mongo.log --logappend &
 6、新建stopMongoDB.sh，内容为：
 mongod --dbpath=/app/mongodb/data/db --shutdown
 7、使用startMongoDB.sh启动
