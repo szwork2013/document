@@ -1,0 +1,6 @@
+1 安装python
+yum update					//更新yum库。
+yum install python27		//安装python2.7版本
+
+2 安装gcc
+如果没有gcc就需要安装。
